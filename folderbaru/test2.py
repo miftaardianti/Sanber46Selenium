@@ -5,12 +5,14 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+import baseLogin
 
 class TestLogin(unittest.TestCase):
 
     def setUp(self):
-        self.browser = webdriver.Chrome(ChromeDriverManager().install())
-        # webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        #self.driver = webdriver.Chrome()
+        #self.browser = webdriver.Chrome(ChromeDriverManager().install())
+        self.browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
  
     def test_a_success_login(self):
         # steps
@@ -26,7 +28,7 @@ class TestLogin(unittest.TestCase):
 
         # validasi
         response_data = driver.find_element(By.CLASS_NAME,"title").text
-        self.assertIn('PRODUCTS', response_data)
+        self.assertIn('Products', response_data)
 
     def tearDown(self):
         self.browser.close()
